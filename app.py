@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 
 import requests
 import pandas as pd
@@ -28,15 +29,13 @@ def read_books():
 def get_nifty50():
         r = requests.get("https://en.wikipedia.org/wiki/NIFTY_50")
         df = pd.read_html(r.content)[2]
-        json = df.to_json()
-        return JSONResponse(json)
+        return jsonable_encoder(df)
 
 
-@app.get("/ltp")
+@app.get("/price/")
 
-def get_ltp():
-        start = datetime(2023, 1, 1)
-        end = datetime(2023, 12, 6)
-        df = yf.download('INFY.NS',start,end)
-        json = df.to_json()
-        return JSONResponse(json)
+def get_price_by_symbol(symbol:str,start:str,end:str):
+        #date input format is "YYYY-MM-DD"
+        df = yf.download(symbol,start=start,end=end)
+        df_json = df.to_dict(orient='records')
+        return df_json
