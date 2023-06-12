@@ -23,3 +23,4 @@ tzdata==2022.6
 unicorn==2.0.1.post1
 urllib3==1.26.13
 Werkzeug==2.2.2
+uvicorn==0.20.0
