@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
 import requests
-import json
 import pandas as pd
 
 app = FastAPI()
