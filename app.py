@@ -29,7 +29,8 @@ def read_books():
 def get_nifty50():
         r = requests.get("https://en.wikipedia.org/wiki/NIFTY_50")
         df = pd.read_html(r.content)[2]
-        return jsonable_encoder(df)
+        df_json = df.to_dict(orient='records')
+        return df_json
 
 
 @app.get("/price/")
