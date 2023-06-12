@@ -4,6 +4,9 @@ from fastapi.responses import JSONResponse
 import requests
 import pandas as pd
 
+import yfinance as yf
+from datetime import datetime
+
 app = FastAPI()
 
 @app.get("/")
@@ -25,5 +28,15 @@ def read_books():
 def get_nifty50():
         r = requests.get("https://en.wikipedia.org/wiki/NIFTY_50")
         df = pd.read_html(r.content)[2]
+        json = df.to_json()
+        return JSONResponse(json)
+
+
+@app.get("/ltp")
+
+def get_ltp():
+        start = datetime(2023, 1, 1)
+        end = datetime(2023, 12, 6)
+        df = yf.download('INFY.NS',start,end)
         json = df.to_json()
         return JSONResponse(json)
