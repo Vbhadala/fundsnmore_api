@@ -24,6 +24,6 @@ def read_books():
 
 def get_nifty50():
         r = requests.get("https://en.wikipedia.org/wiki/NIFTY_50")
-        df = pd.read_html(r.content)[3]
+        df = pd.read_html(r.content)[2]
         json = df.to_json()
         return JSONResponse(json)
