@@ -4,7 +4,7 @@ import requests
 import json
 import pandas as pd
 import mibian
-
+from scipy.stats import norm 
 
 def fetch_nifty(exdate):
 
