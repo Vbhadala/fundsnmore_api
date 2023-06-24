@@ -27,18 +27,15 @@ from nifty import fetch_nifty, compute_greeks, patch,process_row, operation,calc
 
 def nifty():
         r = fetch_nifty("29-Jun-2023")
-        
         df_chain_json = r[0].to_dict(orient='records')
-        df_ops_json = r[1].to_dict(orient='records')
-        
-        return df_chain_json, df_ops_json
+        return df_chain_json
     
+@app.get("/nifty_greeks")
 
-        return type(r)
-
-
-
-
+def nifty():
+        r = fetch_nifty("29-Jun-2023")
+        df_ops_json = r[1].to_dict(orient='records')
+        return df_ops_json
 
 @app.get("/nifty50")
 
