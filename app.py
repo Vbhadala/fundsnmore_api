@@ -33,7 +33,7 @@ def nifty():
 @app.get("/nifty_greeks")
 
 def nifty():
-        r = fetch_nifty("29-Jun-2023")
+        r = fetch_nifty("27-Jul-2023")
         df_ops_json = r[1].to_dict(orient='records')
         return df_ops_json
 
