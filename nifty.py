@@ -66,7 +66,7 @@ def process_row(row):
     row['dte'] = (expiry - today).days
  
     # Calculate 'should_remove' column
-    if (row['count'] < -1 and row['type'] == 'CE') or (row['count'] > 10 and row['type'] == 'CE'):
+    if (row['count'] < -1 and row['type'] == 'CE') or (row['count'] > 8 and row['type'] == 'CE'):
         row['should_remove'] = True
     elif (row['count'] > 1 and row['type'] == 'PE') or (row['count'] < -10 and row['type'] == 'PE'):
         row['should_remove'] = True
