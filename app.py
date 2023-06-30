@@ -26,7 +26,7 @@ from nifty import fetch_nifty, compute_greeks, patch,process_row, operation,calc
 @app.get("/nifty")
 
 def nifty():
-        r = fetch_nifty("29-Jun-2023")
+        r = fetch_nifty("27-Jul-2023")
         df_chain_json = r[0].to_dict(orient='records')
         return df_chain_json
     
