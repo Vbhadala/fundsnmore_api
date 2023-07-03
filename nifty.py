@@ -100,7 +100,7 @@ def compute_greeks(row):
         vol = mibian.BS([spot,strike,rate,days], putPrice=price).impliedVolatility
         g = mibian.BS([spot, strike,rate,days], volatility=vol)
         
-        greeks["Delta"] = g.putDelta.round(2) if g.putDeltaDelta is not None else 0
+        greeks["Delta"] = g.putDelta.round(2) if g.putDelta is not None else 0
         greeks["Theta"] = g.putTheta.round(2) if g.putTheta is not None else 0
         greeks["IV"] = round(vol,2) if vol is not None else 0
         greeks["Vega"] = g.vega.round(2) if g.vega is not None else 0
