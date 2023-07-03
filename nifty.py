@@ -66,7 +66,7 @@ def process_row(row):
     row['dte'] = (expiry - today).days
  
     # Calculate 'should_remove' column
-    if (row['count'] < -1 and row['type'] == 'CE') or (row['count'] > 8 and row['type'] == 'CE'):
+    if (row['count'] < -1 and row['type'] == 'CE') or (row['count'] > 10 and row['type'] == 'CE'):
         row['should_remove'] = True
     elif (row['count'] > 1 and row['type'] == 'PE') or (row['count'] < -10 and row['type'] == 'PE'):
         row['should_remove'] = True
@@ -90,20 +90,20 @@ def compute_greeks(row):
         vol = mibian.BS([spot,strike,rate,days], callPrice=price).impliedVolatility
         g = mibian.BS([spot,strike,rate,days], volatility=vol)
         
-        greeks["Delta"] = g.callDelta.round(2)
-        greeks["Theta"] = g.callTheta.round(2)
-        greeks["IV"] = round(vol,2)
-        greeks["Vega"] = g.vega.round(2)
+        greeks["Delta"] = g.callDelta.round(2) if g.callDelta is not None else 0
+        greeks["Theta"] = g.callTheta.round(2) if g.callTheta is not None else 0
+        greeks["IV"] = round(vol,2) if vol is not None else 0
+        greeks["Vega"] = g.vega.round(2) if g.vega is not None else 0
        
         
     else:
         vol = mibian.BS([spot,strike,rate,days], putPrice=price).impliedVolatility
         g = mibian.BS([spot, strike,rate,days], volatility=vol)
         
-        greeks["Delta"] = g.putDelta.round(2)
-        greeks["Theta"] = g.putTheta.round(2)
-        greeks["IV"] = round(vol,2)
-        greeks["Vega"] = g.vega.round(2)
+        greeks["Delta"] = g.putDelta.round(2) if g.putDeltaDelta is not None else 0
+        greeks["Theta"] = g.putTheta.round(2) if g.putTheta is not None else 0
+        greeks["IV"] = round(vol,2) if vol is not None else 0
+        greeks["Vega"] = g.vega.round(2) if g.vega is not None else 0
         
     return greeks
 
