@@ -23,17 +23,17 @@ def first_api():
 
 from nifty import fetch_nifty, compute_greeks, patch,process_row, operation,calculate_max_pain
 
-@app.get("/nifty")
+@app.get("/nifty/{dynamic_param}")
 
-def nifty():
-        r = fetch_nifty("06-Jul-2023")
+def nifty(dynamic_param : str):
+        r = fetch_nifty(dynamic_param)
         df_chain_json = r[0].to_dict(orient='records')
         return df_chain_json
     
-@app.get("/nifty_greeks")
+@app.get("/nifty_greeks/{dynamic_param}")
 
-def nifty():
-        r = fetch_nifty("06-Jul-2023")
+def nifty(dynamic_param : str):
+        r = fetch_nifty(dynamic_param)
         df_ops_json = r[1].to_dict(orient='records')
         return df_ops_json
 
